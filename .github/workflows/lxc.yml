@@ -32,12 +32,5 @@ jobs:
     steps:
       - uses: canonical/setup-lxd@v0.1.1
       - name: Run LXC Test
-        run: |
-          #lxc-checkconfig
-          lxc launch ${{ matrix.test-lxc-image }} target
-          lxc config device add target host disk source=$PWD path=/host
-          lxc list
-          lxc exec target -- test.sh
-          lxc stop target
-          lxc delete target
+        run: test-lxc.sh ${{ matrix.test-lxc-image }}
 
