@@ -36,5 +36,5 @@ jobs:
         run: |
           echo $PWD
           find .
-          test-lxc.sh ${{ matrix.test-lxc-image }}
+          ./test-lxc.sh ${{ matrix.test-lxc-image }}
 
