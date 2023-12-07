@@ -12,9 +12,9 @@ jobs:
       fail-fast: false
       matrix:
         label:
-          - Debian GNU/Linux bullseye amd64
+          #- Debian GNU/Linux bullseye amd64
           - Debian GNU/Linux bookworm amd64
-          - Ubuntu Focal amd64
+          #- Ubuntu Focal amd64
           - Ubuntu Jammy amd64
         include:
           # - label: Debian GNU/Linux bullseye amd64
