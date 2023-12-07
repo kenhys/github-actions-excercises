@@ -37,6 +37,7 @@ jobs:
           lxc launch ${{ matrix.test-lxc-image }} target
           lxc config device add target host disk source=$PWD path=/host
           lxc list container
+          lxc exec -- /host/test.sh
           lxc stop target
           lxc delete target
 
