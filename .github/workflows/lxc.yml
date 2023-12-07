@@ -1,0 +1,43 @@
+name: Apt based Linux
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        label:
+          - Debian GNU/Linux bullseye amd64
+          - Debian GNU/Linux bookworm amd64
+          - Ubuntu Focal amd64
+          - Ubuntu Jammy amd64
+        include:
+          - label: Debian GNU/Linux bullseye amd64
+            rake-job: debian-bullseye
+            test-lxc-image: images:debian/11
+          - label: Debian GNU/Linux bookworm amd64
+            rake-job: debian-bookworm
+            test-lxc-image: images:debian/12
+          - label: Ubuntu Focal amd64
+            rake-job: ubuntu-focal
+            test-lxc-image: ubuntu:20.04
+          - label: Ubuntu Jammy amd64
+            rake-job: ubuntu-jammy
+            test-lxc-image: ubuntu:22.04
+    steps:
+      - uses: canonical/setup-lxd@v0.1.1
+      - name: Run LXC Test
+        run: |
+          lxc-checkconfig
+          lxc launch ${{ matrix.test-lxc-image }} target
+          lxc config device add target host disk source=$PWD path=/host
+          lxc list container
+          lxc stop target
+          lxc delete target
+
