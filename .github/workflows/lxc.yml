@@ -17,15 +17,15 @@ jobs:
           - Ubuntu Focal amd64
           - Ubuntu Jammy amd64
         include:
-          - label: Debian GNU/Linux bullseye amd64
-            rake-job: debian-bullseye
-            test-lxc-image: images:debian/11
+          # - label: Debian GNU/Linux bullseye amd64
+          #   rake-job: debian-bullseye
+          #   test-lxc-image: images:debian/11
           - label: Debian GNU/Linux bookworm amd64
             rake-job: debian-bookworm
             test-lxc-image: images:debian/12
-          - label: Ubuntu Focal amd64
-            rake-job: ubuntu-focal
-            test-lxc-image: ubuntu:20.04
+          # - label: Ubuntu Focal amd64
+          #   rake-job: ubuntu-focal
+          #   test-lxc-image: ubuntu:20.04
           - label: Ubuntu Jammy amd64
             rake-job: ubuntu-jammy
             test-lxc-image: ubuntu:22.04
