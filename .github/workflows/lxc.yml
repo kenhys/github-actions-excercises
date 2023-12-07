@@ -32,5 +32,7 @@ jobs:
     steps:
       - uses: canonical/setup-lxd@v0.1.1
       - name: Run LXC Test
-        run: test-lxc.sh ${{ matrix.test-lxc-image }}
+        run: |
+          find .
+          ./test-lxc.sh ${{ matrix.test-lxc-image }}
 
