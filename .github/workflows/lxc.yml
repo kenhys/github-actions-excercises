@@ -33,5 +33,8 @@ jobs:
       - uses: actions/checkout@master
       - uses: canonical/setup-lxd@v0.1.1
       - name: Run LXC Test
-        run: test-lxc.sh ${{ matrix.test-lxc-image }}
+        run: |
+          echo $PWD
+          find .
+          test-lxc.sh ${{ matrix.test-lxc-image }}
 
