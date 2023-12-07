@@ -30,9 +30,8 @@ jobs:
             rake-job: ubuntu-jammy
             test-lxc-image: ubuntu:22.04
     steps:
+      - uses: actions/checkout@master
       - uses: canonical/setup-lxd@v0.1.1
       - name: Run LXC Test
-        run: |
-          find .
-          ./test-lxc.sh ${{ matrix.test-lxc-image }}
+        run: test-lxc.sh ${{ matrix.test-lxc-image }}
 
