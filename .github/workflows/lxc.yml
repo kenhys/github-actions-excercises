@@ -5,8 +5,55 @@ on:
       - main
   pull_request:
 jobs:
-  test:
-    name: Test
+  v1test:
+    name: Test with CGroup V1
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        label:
+          #- Debian GNU/Linux bullseye amd64
+          - Debian GNU/Linux bookworm amd64
+          #- Ubuntu Focal amd64
+          - Ubuntu Jammy amd64
+        include:
+          - label: Debian GNU/Linux bullseye amd64
+            rake-job: debian-bullseye
+            test-lxc-image: images:debian/11
+          - label: Debian GNU/Linux bookworm amd64
+            rake-job: debian-bookworm
+            test-lxc-image: images:debian/12
+          - label: Ubuntu Focal amd64
+            rake-job: ubuntu-focal
+            test-lxc-image: ubuntu:20.04
+          - label: Ubuntu Jammy amd64
+            rake-job: ubuntu-jammy
+            test-lxc-image: ubuntu:22.04
+          - label: RockyLinux 8 x86_64
+            rake-job: rockylinux-8
+            test-lxc-image: images:rockylinux/8
+          - label: AlmaLinux 9 x86_64
+            rake-job: almalinux-9
+            test-lxc-image: images:almalinux/9
+          - label: AmazonLinux 2 x86_64
+            rake-job: amazonlinux-2
+            test-lxc-image: images:amazonlinux/2
+          - label: AmazonLinux 2023 x86_64
+            rake-job: amazonlinux-2023
+            test-lxc-image: images:amazonlinux/2023
+    steps:
+      - uses: actions/checkout@master
+      - uses: canonical/setup-lxd@v0.1.1
+      - name: List LXC images
+        run: |
+          lxc image list images:
+      - name: Run LXC Test
+        run: |
+          echo $PWD
+          #find .
+          ./test-lxc.sh ${{ matrix.test-lxc-image }}
+  v2test:
+    name: Test with CGroup V2
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
