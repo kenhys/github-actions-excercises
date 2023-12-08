@@ -41,6 +41,6 @@ jobs:
       - name: Run LXC Test
         run: |
           echo $PWD
-          find .
+          #find .
           ./test-lxc.sh ${{ matrix.test-lxc-image }}
 
