@@ -2,7 +2,7 @@
 
 set -x
 
-lxc image list images
+lxc image list images:
 
 #lxc-checkconfig
 lxc launch $1 target
