@@ -44,6 +44,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: canonical/setup-lxd@v0.1.1
+      - name: List LXC images
+        run: lxc image list images:
       - name: Run LXC Test
         run: |
           echo $PWD
