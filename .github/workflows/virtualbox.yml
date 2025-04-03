@@ -1,0 +1,24 @@
+name: LXC test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+jobs:
+  virtualbox:
+    name: Test with CGroup V1
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Spin up vagrant
+        run: |
+          sudo apt-get install -y vagrant virtualbox
+          vagrant --version
+          vagrant status
+          vagrant up --provider=virtualbox ${{ matrix.rake-job }}
+      - name: Run Test amazonlinux-2 on ubuntu-22.04
+        run: |
+          vagrant ssh amazonlinux-2 -- /host/test-yum.sh
