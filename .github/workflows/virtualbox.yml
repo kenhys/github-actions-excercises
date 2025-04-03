@@ -25,7 +25,6 @@ jobs:
       - name: Run Test amazonlinux-2 on ubuntu-22.04
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
-jobs:
   on_macos:
     name: Test with CGroup V1
     runs-on: macos-latest
