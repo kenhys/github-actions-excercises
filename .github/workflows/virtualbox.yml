@@ -9,7 +9,7 @@ concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
   cancel-in-progress: true
 jobs:
-  virtualbox:
+  on_jammy:
     name: Test with CGroup V1
     runs-on: ubuntu-22.04
     strategy:
@@ -23,5 +23,21 @@ jobs:
           vagrant status
           vagrant up --provider=virtualbox ${{ matrix.rake-job }}
       - name: Run Test amazonlinux-2 on ubuntu-22.04
+        run: |
+          vagrant ssh amazonlinux-2 -- /host/test-yum.sh
+jobs:
+  on_macos:
+    name: Test with CGroup V1
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Spin up vagrant
+        run: |
+          vagrant --version
+          vagrant status
+          vagrant up --provider=virtualbox ${{ matrix.rake-job }}
+      - name: Run Test amazonlinux-2 on macos-latest
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
