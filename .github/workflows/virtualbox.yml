@@ -5,6 +5,9 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   virtualbox:
     name: Test with CGroup V1
