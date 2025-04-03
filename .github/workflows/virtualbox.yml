@@ -27,7 +27,7 @@ jobs:
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
   on_macos:
     name: Test with CGroup V1 on macos
-    runs-on: macos-latest
+    runs-on: macos-13
     strategy:
       fail-fast: false
     steps:
