@@ -36,7 +36,7 @@ jobs:
         run: |
           vagrant --version
           vagrant status
-          vagrant up --provider=virtualbox ${{ matrix.rake-job }}
+          vagrant up --provider=virtualbox --debug ${{ matrix.rake-job }}
       - name: Run Test amazonlinux-2 on macos-latest
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
