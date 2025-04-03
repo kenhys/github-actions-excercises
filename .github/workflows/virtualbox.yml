@@ -1,4 +1,4 @@
-name: LXC test
+name: VirtualBox test
 on:
   push:
     branches:
