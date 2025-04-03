@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   on_jammy:
-    name: Test with CGroup V1
+    name: Test with CGroup V1 on jammy
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -26,7 +26,7 @@ jobs:
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
   on_macos:
-    name: Test with CGroup V1
+    name: Test with CGroup V1 on macos
     runs-on: macos-latest
     strategy:
       fail-fast: false
