@@ -32,11 +32,13 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: Spin up vagrant
+      - name: Set up vagrant
         run: |
           vagrant --version
           vagrant status
           lsmod | grep kvm
+      - name: Spin up vagrant
+        run: |
           vagrant up --provider virtualbox --debug ${{ matrix.rake-job }}
       - name: Run Test amazonlinux-2 on macos-latest
         run: |
