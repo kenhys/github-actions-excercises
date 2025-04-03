@@ -37,7 +37,7 @@ jobs:
           vagrant --version
           vagrant status
           lsmod | grep kvm
-          vagrant up --provider=virtualbox --debug ${{ matrix.rake-job }}
+          vagrant up --provider virtualbox --debug ${{ matrix.rake-job }}
       - name: Run Test amazonlinux-2 on macos-latest
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
