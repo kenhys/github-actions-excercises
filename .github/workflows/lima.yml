@@ -9,9 +9,6 @@ concurrency:
 jobs:
   docker-in-docker:
     runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cgroup-version: ["v1", "v2"]
     steps:
       - uses: actions/checkout@v4
       # Steps for cgroups-v1 only (using Lima with AlmaLinux 8)
