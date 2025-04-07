@@ -50,4 +50,4 @@ jobs:
           docker version
       # Run tests differently based on cgroup version
       - name: Run tests (cgroups-v1)
-        run: docker -v $(pwd):/host amazonlinux:2 cat /etc/os-release
+        run: docker run --rm -v $(pwd):/host amazonlinux:2 cat /etc/os-release
