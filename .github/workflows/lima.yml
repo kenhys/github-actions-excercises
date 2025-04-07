@@ -2,7 +2,7 @@ name: Lima test
 on:
   push:
   pull_request:
-  dispatch_workflow:
+  workflow_dispatch:
 
 jobs:
   docker-in-docker:
