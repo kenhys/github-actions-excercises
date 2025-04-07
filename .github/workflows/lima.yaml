@@ -1,5 +1,4 @@
-name: 🧪 e2e test
-
+name: Lima test
 on:
   push:
   pull_request:
