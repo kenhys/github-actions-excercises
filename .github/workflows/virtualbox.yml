@@ -18,6 +18,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set up vagrant
         run: |
+          cat /proc/cpuinfo | grep -E "vmx|svm"
+          lsmod | grep kvm
           sudo apt-get update
           sudo apt-get install -y vagrant virtualbox
           vagrant --version
@@ -37,10 +39,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set up vagrant
         run: |
-          vagrant --version
-          vagrant status
           cat /proc/cpuinfo | grep -E "vmx|svm"
           lsmod | grep kvm
+          vagrant --version
+          vagrant status
       - name: Spin up vagrant
         run: |
           vagrant up --provider virtualbox --debug amazonlinux-2
@@ -56,9 +58,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set up vagrant
         run: |
+          cat /proc/cpuinfo | grep -E "vmx|svm"
+          lsmod | grep kvm
           vagrant --version
           vagrant status
-          lsmod | grep kvm
       - name: Spin up vagrant
         run: |
           vagrant up --provider virtualbox --debug amazonlinux-2
