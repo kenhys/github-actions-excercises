@@ -56,6 +56,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         virtual_box.memory = memory if memory
       end
     end
-    #config.vm.synced_folder ".", "/host"
+    config.vm.synced_folder ".", "/host"
   end
 end
