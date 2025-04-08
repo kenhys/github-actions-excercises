@@ -51,10 +51,12 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - name: Set up vagrant
+      - name: Show host information
         run: |
           cat /proc/cpuinfo | grep -E "vmx|svm"
           lsmod | grep kvm
+      - name: Set up vagrant
+        run: |
           vagrant --version
           vagrant status
       - name: Spin up vagrant
