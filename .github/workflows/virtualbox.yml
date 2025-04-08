@@ -39,6 +39,7 @@ jobs:
         run: |
           vagrant --version
           vagrant status
+          cat /proc/cpuinfo | grep -E "vmx|svm"
           lsmod | grep kvm
       - name: Spin up vagrant
         run: |
