@@ -24,7 +24,7 @@ jobs:
           vagrant status
       - name: Spin up vagrant
         run: |
-          vagrant up --provider virtualbox --debug ${{ matrix.rake-job }}
+          vagrant up --provider virtualbox --debug amazonlinux-2
       - name: Run Test amazonlinux-2 on ubuntu-22.04
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
