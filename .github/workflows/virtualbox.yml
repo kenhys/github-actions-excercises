@@ -92,6 +92,7 @@ jobs:
       - name: Set up vagrant
         run: |
           # No vagrant by default
+          brew install --cask virtualbox
           brew install hashicorp/tap/hashicorp-vagrant
           vagrant --version
           vagrant status
@@ -114,6 +115,7 @@ jobs:
       - name: Set up vagrant
         run: |
           # No vagrant by default
+          brew install --cask virtualbox
           brew install hashicorp/tap/hashicorp-vagrant
           vagrant --version
           vagrant status
@@ -136,6 +138,7 @@ jobs:
       - name: Set up vagrant
         run: |
           # No vagrant by default
+          brew install --cask virtualbox
           brew install hashicorp/tap/hashicorp-vagrant
           vagrant --version
           vagrant status
