@@ -2,4 +2,4 @@
 
 set -ex
 
-sudo yum update
+sudo yum update -y
