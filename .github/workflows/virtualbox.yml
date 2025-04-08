@@ -9,7 +9,7 @@ concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
   cancel-in-progress: true
 jobs:
-  on_jammy:
+  jammy:
     name: CGroup V1 on jammy
     runs-on: ubuntu-22.04
     strategy:
@@ -44,7 +44,7 @@ jobs:
       - name: Run Test ${{ matrix.label }} on ubuntu-22.04
         run: |
           vagrant ssh ${{ matrix.image }} -- /host/test-yum.sh
-  on_noble:
+  noble:
     name: CGroup V1 on noble
     runs-on: ubuntu-24.04
     strategy:
@@ -79,7 +79,7 @@ jobs:
       - name: Run Test ${{ matrix.label }} on ubuntu-24.04
         run: |
           vagrant ssh ${{ matrix.image }} -- /host/test-yum.sh
-  on_macos13:
+  macos13:
     name: CGroup V1 on macos-13
     runs-on: macos-13
     strategy:
@@ -100,7 +100,26 @@ jobs:
       - name: Run Test amazonlinux-2 on macos-13
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
-  on_macos:
+  macos14:
+    name: CGroup V1 on macos-14
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up vagrant
+        run: |
+          cat /proc/cpuinfo | grep -E "vmx|svm"
+          lsmod | grep kvm
+          vagrant --version
+          vagrant status
+      - name: Spin up vagrant
+        run: |
+          vagrant up --provider virtualbox --debug amazonlinux-2
+      - name: Run Test amazonlinux-2 on macos-latest
+        run: |
+          vagrant ssh amazonlinux-2 -- /host/test-yum.sh
+  macos:
     name: CGroup V1 on macos-latest
     runs-on: macos-latest
     strategy:
