@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   on_jammy:
-    name: Test with CGroup V1 on jammy
+    name: CGroup V1 on jammy
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -45,7 +45,7 @@ jobs:
         run: |
           vagrant ssh ${{ matrix.image }} -- /host/test-yum.sh
   on_macos13:
-    name: Test with CGroup V1 on macos-13
+    name: CGroup V1 on macos-13
     runs-on: macos-13
     strategy:
       fail-fast: false
@@ -66,7 +66,7 @@ jobs:
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
   on_macos:
-    name: Test with CGroup V1 on macos-latest
+    name: CGroup V1 on macos-latest
     runs-on: macos-latest
     strategy:
       fail-fast: false
