@@ -47,6 +47,21 @@ jobs:
       - name: Run Test amazonlinux-2 on macos-13
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
+  on_macos:
+    name: Test with CGroup V1 on macos-latest
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up vagrant
+        run: |
+          vagrant --version
+          vagrant status
+          lsmod | grep kvm
+      - name: Spin up vagrant
+        run: |
+          vagrant up --provider virtualbox --debug amazonlinux-2
       - name: Run Test amazonlinux-2 on macos-latest
         run: |
           vagrant ssh amazonlinux-2 -- /host/test-yum.sh
