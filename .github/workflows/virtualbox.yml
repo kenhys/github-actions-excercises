@@ -40,7 +40,7 @@ jobs:
           vagrant status
       - name: Spin up vagrant
         run: |
-          vagrant up --provider virtualbox --debug ${{ matrix.image }}
+          vagrant up --provider virtualbox ${{ matrix.image }}
       - name: Run Test ${{ matrix.label }} on ubuntu-22.04
         run: |
           vagrant ssh ${{ matrix.image }} -- /host/test-yum.sh
