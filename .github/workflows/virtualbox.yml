@@ -14,18 +14,18 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
-    matrix:
-        label:
-          - AmazonLinux/2
-          #- AmazonLinux/2023
-          - AlmaLinux/9
-        include:
-          - label: AmazonLinux/2
-            image: amazonlinux-2
-          #- label: AmazonLinux/2023
-          #  image: amazonlinux-2023
-          - label: AlmaLinux/9
-            image: almalinux-9
+      matrix:
+          label:
+            - AmazonLinux/2
+            #- AmazonLinux/2023
+            - AlmaLinux/9
+          include:
+            - label: AmazonLinux/2
+              image: amazonlinux-2
+            #- label: AmazonLinux/2023
+            #  image: amazonlinux-2023
+            - label: AlmaLinux/9
+              image: almalinux-9
     steps:
       - uses: actions/checkout@v4
       - name: Show host information
