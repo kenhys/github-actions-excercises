@@ -1,9 +1,8 @@
 name: LXC test
 on:
   push:
-    branches:
-      - main
   pull_request:
+  workflow_dipatch:
 concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
   cancel-in-progress: true
