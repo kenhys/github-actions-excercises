@@ -1,0 +1,45 @@
+name: LXC test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  define-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      steps:
+        - uses: actions/checkout@v4
+          - id: set-matrix
+            run: echo "matrix=$(cat incus.matrix.json | jq --compact-output)" >> $GITHUB_OUTPUT
+            working-directory: .github/workflows/
+  v1test:
+    needs: define-matrix
+    name: Test with CGroup V1
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.define-matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Incus
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y -V incus
+      - name: Allow egress network traffic flows for Incus
+        # https://linuxcontainers.org/incus/docs/main/howto/network_bridge_firewalld/#prevent-connectivity-issues-with-incus-and-docker
+        run: |
+          sudo iptables -I DOCKER-USER -i incusbr0 -j ACCEPT
+          sudo iptables -I DOCKER-USER -o incusbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+      - name: Setup Incus
+        run: |
+          sudo incus admin init --auto
+      - name: Run LXC Test
+        run: |
+          echo $PWD
+          #find .
+          ./test-lxc.sh ${{ matrix.test-lxc-image }}
