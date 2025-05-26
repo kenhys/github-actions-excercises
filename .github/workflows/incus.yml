@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
-      steps:
-        - uses: actions/checkout@v4
-          - id: set-matrix
-            run: echo "matrix=$(cat incus.matrix.json | jq --compact-output)" >> $GITHUB_OUTPUT
-            working-directory: .github/workflows/
+    steps:
+      - uses: actions/checkout@v4
+        - id: set-matrix
+          run: echo "matrix=$(cat incus.matrix.json | jq --compact-output)" >> $GITHUB_OUTPUT
+          working-directory: .github/workflows/
   v1test:
     needs: define-matrix
     name: Test with CGroup V1
