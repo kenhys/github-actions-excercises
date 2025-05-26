@@ -42,6 +42,6 @@ jobs:
         run: |
           docker images
           docker run -d --tmpfs /tmp --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro amazonlinux:2 
-          docker ps --help
+          docker ps
           CID=$(docker ps | tail -n 1 | awk '{print $1}')
           docker exec -it $CID test-fluent-package.sh
