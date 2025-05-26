@@ -1,0 +1,17 @@
+name: Test jobs.<job_id>.container.image
+on:
+  push:
+  pull_request:
+  workflow_dipatch:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  amazonlinux-2-container-image:
+    runs-on: ubuntu-latest
+    container:
+      image: images.linuxcontainers.org/amazonlinux/2
+    steps:
+      - uses: actions/checkout@v4
+      
+      
