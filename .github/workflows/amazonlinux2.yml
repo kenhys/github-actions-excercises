@@ -43,7 +43,7 @@ jobs:
           echo "show images:"
           docker images
           echo "run amazonlinux:2"
-          docker run --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro amazonlinux:2 
+          docker run -t --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro amazonlinux:2 
           echo "show containers:"
           docker ps
           CID=$(docker ps | tail -n 1 | awk '{print $1}')
