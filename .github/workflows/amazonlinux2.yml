@@ -38,12 +38,15 @@ jobs:
       - name: pull amazonlinux:2 image
         run: |
           docker pull docker.io/amazonlinux:2
+      - name: build custom image
+        run: |
+          docker build -t test-amazonlinux2 .
       - name: run amazonlinux:2 image
         run: |
           echo "show images:"
           docker images
           echo "run amazonlinux:2"
-          docker run -t --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro amazonlinux:2 
+          docker run -d --privileged --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro test-amazonlinux2
           echo "show containers:"
           docker ps
           CID=$(docker ps | tail -n 1 | awk '{print $1}')

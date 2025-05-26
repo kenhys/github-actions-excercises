@@ -1,0 +1,7 @@
+[fluent-package-lts]
+name=Fluentd Project
+baseurl=https://packages.treasuredata.com/lts/5/amazon/2/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.treasuredata.com/GPG-KEY-td-agent
+       https://packages.treasuredata.com/GPG-KEY-fluent-package
