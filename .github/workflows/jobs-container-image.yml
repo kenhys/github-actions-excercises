@@ -10,7 +10,7 @@ jobs:
   amazonlinux2:
     runs-on: ubuntu-latest
     container:
-      image: docker.io/amazonlinux/2
+      image: docker.io/amazonlinux:2
       credentials:
         username: kenhys
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
