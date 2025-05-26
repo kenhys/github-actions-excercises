@@ -40,6 +40,8 @@ jobs:
           docker pull docker.io/amazonlinux:2
       - name: run amazonlinux:2 image
         run: |
+          docker images
           docker run -d --tmpfs /tmp --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro amazonlinux:2 
+          docker ps --help
           CID=$(docker ps --noheading | awk '{print $1}')
           docker exec -it $CID test-fluent-package.sh
