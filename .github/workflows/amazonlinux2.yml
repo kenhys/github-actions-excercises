@@ -1,4 +1,4 @@
-name: Test jobs.<job_id>.container.image
+name: Test amazonlinux2
 on:
   push:
   pull_request:
