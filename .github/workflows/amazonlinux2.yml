@@ -46,7 +46,7 @@ jobs:
           echo "show images:"
           docker images
           echo "run amazonlinux:2"
-          docker run -d --privileged --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro test-amazonlinux2
+          docker run -d --privileged --tmpfs /tmp --tmpfs /var/run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v $PWD:/host test-amazonlinux2
           echo "show containers:"
           docker ps
           CID=$(docker ps | tail -n 1 | awk '{print $1}')
@@ -54,4 +54,4 @@ jobs:
           echo "show $CID logs:"
           docker logs $CID
           echo "exec test-fluent-package.sh on $CID:"
-          docker exec -t $CID test-fluent-package.sh
+          docker exec $CID /host/test-fluent-package.sh
