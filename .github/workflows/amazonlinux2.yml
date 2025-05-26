@@ -1,0 +1,26 @@
+name: Test jobs.<job_id>.container.image
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  amazonlinux2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show os-release
+        run: cat /etc/os-release
+      - uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: kenhys
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: pull amazonlinux:2 image
+        run: |
+          docker pull docker.io/amazonlinux:2
+      - name: run amazonlinux:2 image
+        run: |
+          docker exec amazonlinux:2 cat /etc/os-release
