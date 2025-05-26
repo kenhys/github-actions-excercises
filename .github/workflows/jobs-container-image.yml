@@ -7,7 +7,7 @@ concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
   cancel-in-progress: true
 jobs:
-  amazonlinux-2-container-image:
+  amazonlinux2:
     runs-on: ubuntu-latest
     container:
       image: docker.io/amazonlinux/2
