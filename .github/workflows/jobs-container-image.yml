@@ -24,3 +24,4 @@ jobs:
       # - uses: actions/checkout@v4
       - name: show os-release
         run: cat /etc/os-release
+      - uses: actions/checkout@v3
