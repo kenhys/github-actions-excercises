@@ -23,7 +23,7 @@ jobs:
           docker pull docker.io/amazonlinux:2
       - name: run amazonlinux:2 image
         run: |
-          docker exec amazonlinux:2 cat /etc/os-release
+          docker run amazonlinux:2 cat /etc/os-release
   systemd:
     runs-on: ubuntu-latest
     steps:
