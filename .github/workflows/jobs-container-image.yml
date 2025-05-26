@@ -10,7 +10,7 @@ jobs:
   amazonlinux-2-container-image:
     runs-on: ubuntu-latest
     container:
-      image: images.linuxcontainers.org/amazonlinux/2
+      image: docker.io/amazonlinux/2
     steps:
       - uses: actions/checkout@v4
       
