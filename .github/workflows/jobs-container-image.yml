@@ -22,4 +22,5 @@ jobs:
       # /__e/node20/bin/node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by /__e/node20/bin/node)
       # 
       # - uses: actions/checkout@v4
-      run: cat /etc/os-release
+      - name: show os-release
+        run: cat /etc/os-release
