@@ -25,6 +25,7 @@ jobs:
           mkdir -p ~/.rvm/patches/ruby/3.0.5
           curl --retry 5 --retry-delay 5 --location -o ~/.rvm/patches/ruby/3.0.5/fix-ftbfs-with-maybe-unused.patch https://github.com/ruby/ruby/commit/1dfe75b0beb7171b8154ff0856d5149be0207724.patch
           find ~/.rvm/patches/ruby/3.0.5
+      # https://github.com/rvm/rvm/issues/5511
       - name: Install Ruby 3.0.5
         run: |
           source ~/.rvm/scripts/rvm
