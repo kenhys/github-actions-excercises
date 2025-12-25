@@ -20,6 +20,10 @@ jobs:
         run: |
           gpg --keyserver hkp://keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
           curl -sSL https://get.rvm.io | bash -s stable
+      - name: Apply patch
+        run: |
+          mkdir -p ~/.rvm/patches/ruby/3.0.5
+          curl --retry 5 --retry-delay 5 --location -o ~/.rvm/patches/ruby/3.0.5/fix-ftbfs-with-maybe-unused.patch https://github.com/ruby/ruby/commit/1dfe75b0beb7171b8154ff0856d5149be0207724.patch
       - name: Install Ruby 3.0.5
         run: |
           source ~/.rvm/scripts/rvm
