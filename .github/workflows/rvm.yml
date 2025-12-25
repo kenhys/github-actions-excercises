@@ -16,11 +16,10 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/checkout@v6
-        with:
-          repository: 'rvm/rvm'
-          path: rvm
+      - name: Install RVM
+        run: |
+          curl -sSL https://get.rvm.io | bash -s stable
       - name: Install Ruby 3.0.5
         run: |
-          source rvm/scripts/rvm
+          source ~/.rvm/scripts/rvm
           rvm install 3.0.5
