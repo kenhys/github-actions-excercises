@@ -24,3 +24,7 @@ jobs:
         run: |
           source ~/.rvm/scripts/rvm
           rvm install 3.0.5
+      - name: Show make.log
+        if: ${{ failure() }}
+        run: |
+          find ~/.rvm/log -name 'make.log' | xargs cat
