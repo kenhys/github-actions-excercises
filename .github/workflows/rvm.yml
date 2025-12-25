@@ -1,0 +1,26 @@
+name: rvm macOS 15 intel
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+jobs:
+  macos15:
+    name: macOS 15 (intel)
+    runs-on: macos-15-intel
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: 'rvm/rvm'
+          path: rvm
+      - name: Install Ruby 3.0.5
+        run: |
+          source rvm/scripts/rvm
+          rvm install 3.0.5
