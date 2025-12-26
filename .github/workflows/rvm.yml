@@ -37,6 +37,7 @@ jobs:
       - name: Install Ruby 3.0.5
         run: |
           source ~/.rvm/scripts/rvm
+          set +x
           rvm ${{ matrix.arguments }}
       - name: Show make.log
         if: ${{ failure() }}
