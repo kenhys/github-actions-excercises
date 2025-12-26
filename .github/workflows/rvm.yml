@@ -34,3 +34,13 @@ jobs:
         if: ${{ failure() }}
         run: |
           find ~/.rvm/log -name 'make.log' | xargs cat
+      - name: Try install Ruby 3.0.5
+        run: |
+          source ~/.rvm/scripts/rvm
+          rvm uninstall 3.0.5
+          rvm cleanup all
+          rvm try_install 3.0.5 --patch ~/.rvm/patches/ruby/3.0.5/fix-ftbfs-with-maybe-unused.patch
+      - name: Show make.log
+        if: ${{ failure() }}
+        run: |
+          find ~/.rvm/log -name 'make.log' | xargs cat
