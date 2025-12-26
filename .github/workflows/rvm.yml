@@ -10,12 +10,18 @@ concurrency:
   cancel-in-progress: true
 jobs:
   macos15:
-    name: macOS 15 (intel) with ${{ matrix.argument }}
+    name: macOS 15 (intel) ${{ matrix.label }}
     runs-on: macos-15-intel
     strategy:
       fail-fast: false
       matrix:
-        argument: ['install 3.0.5', 'install 3.0.5 --patch ~/.rvm/patches/ruby/3.0.5/fix-ftbfs-with-maybe-unused.patch', 'try_install 3.0.5']
+        include:
+          - label: 'default'
+            arguments: 'install 3.0.5'
+          - label: 'with patch'
+            arguments: 'install 3.0.5 --patch ~/.rvm/patches/ruby/3.0.5/fix-ftbfs-with-maybe-unused.patch'
+          - label: 'try install'
+            arguments: 'try_install 3.0.5'
     steps:
       - uses: actions/checkout@v6
       - name: Install RVM
@@ -31,7 +37,7 @@ jobs:
       - name: Install Ruby 3.0.5
         run: |
           source ~/.rvm/scripts/rvm
-          rvm ${{ matrix.argument }}
+          rvm ${{ matrix.arguments }}
       - name: Show make.log
         if: ${{ failure() }}
         run: |
