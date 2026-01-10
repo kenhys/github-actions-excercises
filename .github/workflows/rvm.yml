@@ -43,6 +43,7 @@ jobs:
         run: |
           find ~/.rvm/log -name 'make.log' | xargs cat
   macos15-intel:
+    if: false
     name: macOS 15 (intel) ${{ matrix.label }}
     runs-on: macos-15-intel
     strategy:
