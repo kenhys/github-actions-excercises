@@ -37,7 +37,7 @@ jobs:
         run: |
           source ~/.rvm/scripts/rvm
           set +x
-          rvm ${{ matrix.ruby }}
+          rvm install ${{ matrix.ruby }}
       - name: Show make.log
         if: ${{ failure() }}
         run: |
