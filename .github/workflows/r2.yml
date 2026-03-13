@@ -1,0 +1,20 @@
+name: CloudFlare R2 Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  cf_ray:
+  name: Test cf_ray
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: fetch v6 RPM
+        run: |
+          curl --silent -I https://fluentd.cdn.cncf.io/6/redhat/10/x86_64/fluent-package-6.0.0-1.el10.x86_64.rpm
