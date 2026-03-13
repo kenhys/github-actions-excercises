@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   cf_ray:
-  name: Test cf_ray
+    name: Test cf_ray
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
